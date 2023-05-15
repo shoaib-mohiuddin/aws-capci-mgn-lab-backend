@@ -24,7 +24,7 @@
 #             variable = "token.actions.githubusercontent.com:sub"
 #             values = ["repo:shoaib-mohiuddin/*:*"]
 #         }
-        
+
 #     }
 # }
 

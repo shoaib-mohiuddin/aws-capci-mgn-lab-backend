@@ -1,6 +1,6 @@
 # S3 Bucket
 resource "aws_s3_bucket" "state_file_bucket" {
-  bucket = "migration-lab-shoaib-tfstates"
+  bucket = var.state_bucket_name
 
   tags = var.tags
 
@@ -37,14 +37,14 @@ resource "aws_kms_key" "kms_cmk" {
 }
 
 # Alias for KMs CMK
-resource "aws_kms_alias" "cmk-alias" {
-  name          = "alias/migration-lab-cmk"
+resource "aws_kms_alias" "cmk_alias" {
+  name          = "alias/${var.kms_alias_name}"
   target_key_id = aws_kms_key.kms_cmk.key_id
 }
 
 # DynamoDB table store state lock
 resource "aws_dynamodb_table" "terraform_lock_tbl" {
-  name           = "migration-lab-terraform-lock"
+  name           = var.tf_ddb_table_name
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "LockID"

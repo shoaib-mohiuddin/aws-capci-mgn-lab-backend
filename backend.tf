@@ -1,8 +1,8 @@
 terraform {
-    backend "s3" {
-        bucket = "migration-lab-shoaib-tfstates"
-        key = "migration-lab/backend/terraform.tfstates"
-        region = "us-west-2"
-        dynamodb_table = "migration-lab-terraform-lock"
-    }
+  backend "s3" {
+    bucket         = "capci-mgn-lab-tfstates"
+    key            = "capci-mgn-lab/backend/terraform.tfstates"
+    region         = "us-west-2"
+    dynamodb_table = "terraform-lock-capci-mgn-lab"
+  }
 }
