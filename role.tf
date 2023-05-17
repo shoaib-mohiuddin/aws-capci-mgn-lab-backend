@@ -8,16 +8,21 @@ resource "aws_iam_openid_connect_provider" "default" {
 
 data "aws_iam_policy_document" "github_assume_role_policy" {
   statement {
-    sid     = "github"
-    actions = ["sts:AssumeRoleWithWebIdentity"]
+    sid     = "GithubOidcAuth"
+    actions = ["sts:AssumeRoleWithWebIdentity", "sts:TagSession"]
     principals {
       type        = "Federated"
       identifiers = [aws_iam_openid_connect_provider.default.arn]
     }
     condition {
-      test     = "StringEquals"
+      test     = "ForAllValues:StringEquals"
       variable = "token.actions.githubusercontent.com:aud"
       values   = ["sts.amazonaws.com"]
+    }
+    condition {
+      test     = "ForAllValues:StringEquals"
+      variable = "token.actions.githubusercontent.com:iss"
+      values   = ["http://token.actions.githubusercontent.com"]
     }
     condition {
       test     = "StringLike"
