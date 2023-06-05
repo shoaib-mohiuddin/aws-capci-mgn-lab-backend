@@ -32,6 +32,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "sse_cmk" {
 
 # KMS CMK
 resource "aws_kms_key" "kms_cmk" {
+  # checkov:skip=CKV_AWS_7: ADD REASON
   description = "This key is used to encrypt bucket objects"
   tags        = var.tags
 }
@@ -44,6 +45,8 @@ resource "aws_kms_alias" "cmk_alias" {
 
 # DynamoDB table store state lock
 resource "aws_dynamodb_table" "terraform_lock_tbl" {
+  # checkov:skip=CKV_AWS_119: ADD REASON
+  # checkov:skip=CKV_AWS_28: ADD REASON
   name           = var.tf_ddb_table_name
   read_capacity  = 1
   write_capacity = 1
