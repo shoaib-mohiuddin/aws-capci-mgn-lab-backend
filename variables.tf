@@ -3,10 +3,10 @@ variable "region" {
   type        = string
 }
 
-variable "tags" {
-  description = "Tags for the resources"
-  type        = map(string)
-}
+# variable "tags" {
+#   description = "Tags for the resources"
+#   type        = map(string)
+# }
 
 variable "state_bucket_name" {
   description = "S3 bucket name to store state files"

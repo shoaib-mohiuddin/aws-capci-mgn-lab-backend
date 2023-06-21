@@ -2,7 +2,7 @@
 resource "aws_s3_bucket" "state_file_bucket" {
   bucket = var.state_bucket_name
 
-  tags = var.tags
+  # tags = var.tags
 
   lifecycle {
     prevent_destroy = true
@@ -34,7 +34,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "sse_cmk" {
 resource "aws_kms_key" "kms_cmk" {
   # checkov:skip=CKV_AWS_7: ADD REASON
   description = "This key is used to encrypt bucket objects"
-  tags        = var.tags
+  # tags        = var.tags
 }
 
 # Alias for KMs CMK
@@ -57,5 +57,5 @@ resource "aws_dynamodb_table" "terraform_lock_tbl" {
     type = "S"
   }
 
-  tags = var.tags
+  # tags = var.tags
 }
